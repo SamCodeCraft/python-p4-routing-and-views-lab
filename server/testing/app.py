@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from flask import Flask
 
+from flask import Flask
 app = Flask(__name__)
 
 # Index route
@@ -17,25 +17,25 @@ def print_string(str_param):
 # Count route
 @app.route('/count/<int:num>')
 def count(num):
-    numbers = '\n'.join(str(i) for i in range(1, num + 1))
+    numbers = '\n'.join(str(i) for i in range(num))
     return f'<h3>Counting up to {num}:</h3><pre>{numbers}</pre>'
 
 # Math route
-@app.route('/math/<float:num1>/<operation>/<float:num2>')
+@app.route('/math/<float:num1>/<string:operation>/<float:num2>')
 def math(num1, operation, num2):
     result = None
-    if operation == '+':
+    if operation == 'add':
         result = num1 + num2
-    elif operation == '-':
+    elif operation == 'subtract':
         result = num1 - num2
-    elif operation == '*':
+    elif operation == 'multiply':
         result = num1 * num2
-    elif operation == 'div':
+    elif operation == 'divide':
         if num2 != 0:
             result = num1 / num2
         else:
             return '<h3>Error: Division by zero</h3>'
-    elif operation == '%':
+    elif operation == 'modulo':
         result = num1 % num2
     else:
         return '<h3>Error: Invalid operation</h3>'
