@@ -21,26 +21,21 @@ def count(num):
     return f'<h3>Counting up to {num}:</h3><pre>{numbers}</pre>'
 
 # Math route
-@app.route('/math/<float:num1>/<string:operation>/<float:num2>')
+@app.route("/math/<int:num1>/<string:operation>/<int:num2>")
 def math(num1, operation, num2):
-    result = None
-    if operation == 'add':
-        result = num1 + num2
-    elif operation == 'subtract':
-        result = num1 - num2
-    elif operation == 'multiply':
-        result = num1 * num2
-    elif operation == 'divide':
-        if num2 != 0:
-            result = num1 / num2
-        else:
-            return '<h3>Error: Division by zero</h3>'
-    elif operation == 'modulo':
-        result = num1 % num2
+    if operation == "+":
+        return str(num1 + num2)
+    elif operation == "-":
+        return str(num1 - num2)
+    elif operation == "*":
+        return str(num1 * num2)
+    elif operation == "div":
+            return str(num1 / num2)
+        
+    elif operation == "%":
+        return str(num1 % num2)
     else:
-        return '<h3>Error: Invalid operation</h3>'
-    
-    return f'<h3>Result of {num1} {operation} {num2} = {result}</h3>'
+        return "<h3>Error: Invalid operation</h3>"
 
 if __name__ == '__main__':
     app.run(debug=True)
